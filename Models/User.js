@@ -18,36 +18,37 @@ User.init(
           type: DataTypes.INTEGER,
           allowNull: false,
           primaryKey: true,
-          autoIncrement: true
+          autoIncrement: true,
+          
         },
         // define a username column
         username: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        twitter: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        github: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        // define an email column
-        email: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
-          validate: {
-            isEmail: true
-          }
-        },
+        // twitter: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
+        // github: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
+        // // define an email column
+        // email: {
+        //   type: DataTypes.STRING,
+        //   allowNull: false,
+        //   unique: true,
+        //   validate: {
+        //     isEmail: true
+        //   }
+        // },
         // define a password column
         password: {
           type: DataTypes.STRING,
           allowNull: false,
           validate: {
-            len: [4]
+            len: [6]
           }
         }
       },
@@ -69,7 +70,7 @@ User.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user'
+    modelName: 'User'
   }
 );
 

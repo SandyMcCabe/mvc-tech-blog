@@ -1,37 +1,22 @@
 const router = require("express").Router();
-const { Post, User, Comment } = require("../models");
+const { Post } = require("../models");
 const withAuth = require("../utils/auth");
-const sequelize = require('../config/connection');
+// const sequelize = require('../config/connection');
 
 // Display posts created by logged in users
 router.get("/", withAuth, (req, res) => {
 	Post.findAll({
 		where: {
-			user_id: req.session.user_id,
-		},
-		attributes: ["id", "post_text", "title", "created_at"],
-		include: [
-			{
-				model: Comment,
-				attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-				include: {
-					model: User,
-					attributes: ["username"],
-				},
-			},
-			{
-				model: User,
-				attributes: ["username"],
-			},
-		],
+			user_id: req.session.user_id
+		}
 	})
-		.then((dbPostData) => {
+		.then(dbPostData => {
 			const posts = dbPostData.map((post) => post.get({ plain: true }));
-			res.render("dashboard", { posts, loggedIn: true });
+			res.render("all-posts-admin", { layout: 'dashboard', posts});
 		})
-		.catch((err) => {
+		.catch(err => {
 			console.log(err);
-			res.status(500).json(err);
+			res.redirect('login');
 		});
 });
 
