@@ -35,7 +35,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(require("./controllers"));
 
-app.listen(PORT, () => {
-	console.log("Now Listening");
-sequelize.sync({ force: false });
+// app.listen(PORT, () => {
+// 	console.log("Now Listening");
+// sequelize.sync({ force: false });
+// });
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
