@@ -7,21 +7,8 @@ router.get("/", (req, res) => {
 	console.log(req.session);
 
 	Post.findAll({
-		// attributes: ["id", "post_text", "title", "created_at"],
 		include: [
 			User
-			// {
-			// 	model: Comment,
-			// 	attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-			// 	include: {
-			// 		model: User,
-			// 		attributes: ["username"],
-			// 	},
-			// },
-			// {
-			// 	model: User,
-			// 	attributes: ["username"],
-			// },
 		],
 	})
 		.then((dbPostData) => {
@@ -67,24 +54,24 @@ router.get("/post/:id", (req, res) => {
 		});
 });
 
-	// redirecting users to homepage once they log in
-	router.get("/login", (req, res) => {
-		if (req.session.loggedIn) {
-			res.redirect("/");
-			return;
-		}
-		res.render("login");
-	});
+// redirecting users to homepage once they log in
+router.get("/login", (req, res) => {
+	if (req.session.loggedIn) {
+		res.redirect("/");
+		return;
+	}
+	res.render("login");
+});
 
-	// rendering sign up page
-	router.get("/signup", (req, res) => {
-		if (req.session.loggedIn) {
-			res.redirect("/");
-			return;
-		}
-		res.render("signup");
-	});
+// rendering sign up page
+router.get("/signup", (req, res) => {
+	if (req.session.loggedIn) {
+		res.redirect("/");
+		return;
+	}
+	res.render("signup");
+});
 
-	// });
+// });
 
-	module.exports = router;
+module.exports = router;
